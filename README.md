@@ -1,4 +1,8 @@
 # Mental-Health-and-Music-EDA
+
+![music and brain 2](https://user-images.githubusercontent.com/88348888/222403106-a3a31895-cdf7-4c34-af18-ccb80526681b.jpg)
+
+
 This project explores the effect of music on respondents to a survey and the respondents themselves using R programming. 
 
  There currently exists the practice of music therapy that uses music as a catalyst to release hormones such as oxytocin to improve an individual's stress levels, mood and overall mental health. By taking a survey online, this project seeks the relationship between music and mental health or respondents across different ages. 
