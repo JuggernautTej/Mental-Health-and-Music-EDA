@@ -49,6 +49,24 @@ head(arrange(mentalhealth_music_survey %>% group_by(Age) %>%
 #### The highest number of responses came from people between the ages of 17 and 26.
 
 ## Survey Respondents Music Streaming Platforms
- ````r
+### What Music streaming platforms did respondents use?
+````r
 unique(mentalhealth_music_survey$`Primary streaming service`)
   ````
+"Spotify" "Pandora" "YouTube Music" "I do not use a streaming service" "Apple Music" "Other streaming service" NA 
+###### Note; I changed "YouTube Music", "I do not use a streaming service", and "Other streaming service" to "YouTube", "None" and "Other" respectively for easy representation.
+
+### Top Music Streaming Service of Respondents
+````r
+arrange((count(mentalhealth_music_survey, `Primary streaming service`)),
+        desc(n))
+  ````
+|Primary streaming service | n   |
+| ------------------------ | --- |
+| Spotify                  | 458 |
+| YouTube                  | 94  |
+| None                     | 71  |
+| Apple Music              | 51  |
+| Other                    | 50  |
+| Pandora                  | 11  |
+| NA                       | 1   |
