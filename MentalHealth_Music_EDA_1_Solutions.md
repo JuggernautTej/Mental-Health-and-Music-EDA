@@ -97,7 +97,7 @@ summary(mentalhealth_music_survey$`Hours per day`)
 | Min    | 1st Quartile | Median | Mean  | 3rd Quartile | Maximum |
 | -------| ------------ | ------ | ----- | ------------ | ------- |
 | 0.00   |  2.00        |  3.00  |  3.57 |  5.00        | 24.00   |
-#### The average listening time from the survey is 3.57 hours. However, there were respondents who claimed that they listened to music 24 hours and didn't listen to music at all. Although unlikely, these are outliers.
+#### The average listening time from the survey is 3.57 hours. However, there were respondents who claimed that they listened to music 24 hours and didn't listen to music at all;these are outliers.
 ````r
 ggplot (data=mentalhealth_music_survey, mapping= aes (x= `Hours per day`))+ geom_histogram (fill="#69b3a2", color="#e9ecef", alpha=0.9) + 
   scale_x_continuous(breaks = seq(0,24, 5)) + labs(title="Music listening time of participants in hours/day ")
@@ -147,4 +147,24 @@ MHM_corr_table <- round((cor(MHM_corr,use = "complete.obs", method = c("pearson"
 corrplot(MHM_corr_table,method = "circle",type = "upper",order="hclust", tl.col = "black", tl.srt = 45, bg="black")
   ````
 ![image](https://user-images.githubusercontent.com/88348888/223414691-30e3d7df-9584-493b-91c3-1001d039727b.png)
-#### There is slight correlation between Composers and Instrumentalists, hours per day listening to music and working, exploring music while working and listening to foreign music while exploring. On the other hand, the following have weak correlation; Age and Exploration, Age and Foreign language music.
+#### There is slight correlation between Composers and Instrumentalists, hours per day listening to music and working, exploring music while working and listening to foreign music while exploring. This means the following:
+#### - Those who are composers also play instruments
+#### - Respondents listen to music mostly while they work.
+#### - Respondents explore different genres of music while they work and, in their exploration, they listen to music from foreign languages.
+#### On the other hand, the following have weak correlation; Age and Exploration, Age and Foreign language music. That is, listening to foreign language based music is irrespective of age and exploring music genres is irrespective of age.
+
+### Survey Respondent Mental Health Based on Their Musical Background
+````r
+MHM_corr2 <- mentalhealth_music_survey %>%
+  select(Instrumentalist,Composer,Anxiety,Depression,Insomnia,OCD)
+MHM_corr2 <- MHM_corr2 %>% 
+  mutate(Instrumentalist= recode(Instrumentalist,'Yes'=1,'No'=0),
+         Composer=recode(Composer,'Yes'=1,'No'=0))
+MHM_corr_table2 <- round(
+  (cor(MHM_corr2,use = "complete.obs", method = c("pearson"))), 2)
+corrplot(MHM_corr_table2,method = "circle",type = "upper",order="hclust", tl.col = "black", tl.srt = 45, bg="black")
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223516403-378f5ce0-36ff-4bf9-a8a5-417c550e1568.png)
+##### There is a slight correlation between mental health and musical background of respondents. In particular, between composers and their depression and insomnia levels; and between instrumentalists and their anxiety and depression levels. These need to be investigated further.
+##### The correlation between the mental health parameters are stronger with Anxiety and Depression having the strongest correlation followed by Depression and Insomnia then Anxiety and OCD. This implies that respondents with anxiety are likely to have depression. This goes for depression and imsonia, and anxiety and OCD.
+
