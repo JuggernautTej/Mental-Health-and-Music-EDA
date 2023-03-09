@@ -168,3 +168,130 @@ corrplot(MHM_corr_table2,method = "circle",type = "upper",order="hclust", tl.col
 ##### There is a slight correlation between mental health and musical background of respondents. In particular, between composers and their depression and insomnia levels; and between instrumentalists and their anxiety and depression levels. These need to be investigated further.
 ##### The correlation between the mental health parameters are stronger with Anxiety and Depression having the strongest correlation followed by Depression and Insomnia then Anxiety and OCD. This implies that respondents with anxiety are likely to have depression. This goes for depression and imsonia, and anxiety and OCD.
 
+## Survey Respondent Mental Health Based on Their Musical Background- Extended Analysis
+### Anxiety
+### Anxiety levels of instrumentalists and non-instrumentalists
+````r
+ggplot(data = count(Instrumentalist,Anxiety), mapping = aes(x = Anxiety,y= n))+
+  geom_bar(stat='identity',fill='black')+ labs(x='Anxiety Score',y= 'Participant Count') + 
+  labs(title = 'Instrumentalists with Anxiety')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223984967-6b01755b-adc5-4159-a3aa-57d33e84ccc7.png)
+
+````r
+ggplot(data = count(Non_Instrusmentalist,Anxiety),
+       mapping = aes(x = Anxiety,y= n))+ geom_bar(stat='identity',fill='red') + 
+  labs(x='Anxiety Score',y= 'Participant Count',title = 'Non-Instrumentalists with Anxiety')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223986614-5459700c-ad92-4d7b-a4dd-6eeedc119535.png)
+##### Although high anxiety levels are prevalent in the entire dataset, most respondents who are instrumentalists experience high anxiety levels (over the midpoint of 5). 
+
+### Anxiety levels of composers and non-composers
+````r
+ggplot(data = count(Composer,Anxiety), mapping = aes(x = Anxiety,y= n))+
+  geom_bar(stat='identity',fill='purple') +
+  labs(x='Anxiety Score',y= 'Participant Count',title = 'Composers with Anxiety')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223988870-5a73c205-abcd-4e8e-a5ec-ee12f225a57c.png)
+````r
+ggplot(data = count(Non_Composer,Anxiety), mapping = aes(x = Anxiety,y= n))+
+  geom_bar(stat='identity',fill='lightblue') + 
+  labs(x='Anxiety Score',y= 'Participant Count',title = 'Non-Composers with Anxiety')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223989263-d75d97c6-da00-478e-8ade-369dca325e96.png)
+##### The trend in very similar to those of the instrumentalists and non-instrumentalists.
+
+### Depression
+### Depression levels of instrumentalists and non-instrumentalists
+````r
+ggplot(data = count(Instrumentalist,Depression), mapping = aes(x = Depression,y= n))+
+  geom_bar(stat='identity',fill='black')+ scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Depression Score',y= 'Participant Count', title = 'Instrumentalists with Depression')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223993083-70558358-68d2-486b-b072-3c1da7f18067.png)
+  ````r
+ggplot(data = count(Non_Instrusmentalist,Depression),mapping = aes(x = Depression,y= n))+ 
+  geom_bar(stat='identity',fill='red') + scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Depression Score',y= 'Participant Count', title = 'Non-Instrumentalists with Depression')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/223994051-ec8c759d-bfff-4b91-a624-6bfcda8de8d9.png)
+#### There is no standout trend in the depression levels amongst intrusmentalists and non-instrumentalists. The spread of those who experience high and low depression levels in this category is fairly similar.
+
+### Depression levels of composers and non-composers
+````r
+ggplot(data = count(Composer,Depression), mapping = aes(x = Depression,y= n))+
+  geom_bar(stat='identity',fill='purple') + scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Depression Score',y= 'Participant Count', title = 'Composers with Depression')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223996849-b249018e-f40c-4e3f-83f0-b6f8885d0530.png)
+  ````r
+ggplot(data = count(Non_Composer,Depression),mapping = aes(x = Depression,y= n))+
+  geom_bar(stat='identity',fill='lightblue')+ scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Depression Score',y= 'Participant Count',title = 'Non-Composers with Depression')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/223998217-e76e6237-9ceb-47a8-a063-c3d35efce03b.png)
+#### There is an obvious trend showing that most composers experience high levels of depression. Amongsts non-composers, there is an even spread between high and low depression levels.
+
+### Insomnia
+### Insomnia levels of instrumentalists and non-instrumentalists
+  ````r
+ggplot(data = count(Instrumentalist,Insomnia), mapping = aes(x = Insomnia,y= n))+
+geom_bar(stat='identity',fill='black')+ scale_x_continuous(breaks = seq(0,10, 2))+ 
+labs(x='Insomnia Score',y= 'Participant Count',title = 'Instrumentalists with Insomnia')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224000066-d477ab9b-66d7-4453-8717-ff6b80e50742.png)
+ ````r
+ggplot(data = count(Non_Instrusmentalist,Insomnia),mapping = aes(x = Insomnia,y= n))+ 
+  geom_bar(stat='identity',fill='red') + scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Insomnia Score',y= 'Participant Count',title = 'Non-Instrumentalists with Insomnia')
+  ````
+ ![image](https://user-images.githubusercontent.com/88348888/224000452-6dfa5ea1-efba-4098-9c9b-8bee09b12361.png)
+#### The dataset shows that most of the instrumentalists and non-instrumentalists exhibit extremely low levels of insomnia (less than 3).
+
+### Insomnia levels of composers and non-composers
+ ````r
+ggplot(data = count(Composer,Insomnia), mapping = aes(x = Insomnia,y= n))+
+  geom_bar(stat='identity',fill='purple') + scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Insomnia Score',y= 'Participant Count', title = 'Composers with Insomnia')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224002095-84e4fef0-01eb-4e82-8cda-21f7f98da7b3.png)
+ ````r
+ggplot(data = count(Non_Composer,Insomnia),mapping = aes(x = Insomnia,y= n))+
+  geom_bar(stat='identity',fill='lightblue')+ scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='Insomnia Score',y= 'Participant Count',title = 'Non-Composers with Insomnia')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224002497-338534af-92e9-4117-be4b-2c9bfa0aee19.png)
+#### Although most of the composers indicated low levels of insomnia, a significant amount also showed high levels of insomnia.
+
+### OCD
+### OCD levels of instrumentalists and non-instrumentalists
+ ````r
+ggplot(data = count(Instrumentalist,OCD), mapping =aes(x = OCD,y= n))+
+geom_bar(stat='identity',fill='black')+ scale_x_continuous(breaks = seq(0,10, 2))+  
+labs(x='OCD Score',y= 'Participant Count',title = 'Instrumentalists with OCD')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224004860-13833264-2ad8-4f08-afc6-501a182debfc.png)
+ ````r
+ggplot(data = count(Non_Instrusmentalist,OCD),mapping = aes(x = OCD,y= n))+ 
+  geom_bar(stat='identity',fill='red') +  scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='OCD Score',y= 'Participant Count',title = 'Non-Instrumentalists with OCD')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224005142-38b7e2b3-789a-4b67-bc44-c0c00a8730ce.png)
+#### Majority of instrumentalists and non-instrumentalists show extremely low levels of OCD.
+
+### OCD levels of composers and non-composers
+ ````r
+ggplot(data = count(Composer,OCD), mapping = aes(x = OCD,y= n))+
+  geom_bar(stat='identity',fill='purple') + scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='OCD Score',y= 'Participant Count',title = 'Composers with OCD')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224005875-8ebd1d91-e767-4ae8-ab01-14ce20b7d413.png)
+   ````r
+ggplot(data = count(Non_Composer,OCD), mapping = aes(x = OCD,y= n))+
+  geom_bar(stat='identity',fill='lightblue')+ scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(x='OCD Score',y= 'Participant Count',title = 'Non-Composers with OCD')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224006798-fd2fd053-7b88-4fd3-a8bf-c5817aa2529a.png)
+#### As is with the instrumentalists, majority composers and non-composers show extremely low levels of OCD.
+
+#### In summary, survey respondents who are instrumentalists and composers experienced high levels of anxiety. In addition, composers also experienced high levels of depression. It is possible that those composers who suffer depression also suffer from insomnia though the number isn't high.
