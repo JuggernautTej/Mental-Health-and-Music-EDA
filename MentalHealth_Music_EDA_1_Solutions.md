@@ -190,7 +190,7 @@ arrange(count(mentalhealth_music_survey, Anxiety),desc(n))
 | 8      | 115 |
 | 6      | 83  |
 | 3      | 69  |
-| 10      67  |
+| 10     | 67  |
 | 5      | 59  |
 | 4      | 56  |
 | 9      | 56  |
@@ -198,7 +198,89 @@ arrange(count(mentalhealth_music_survey, Anxiety),desc(n))
 | 0      | 35  |
 | 1      | 29  |
 | 7.5    | 1   |
+##### Most respondents indicated that they experience high levels of Anxiety, i.e. Anxiety score greater than 5.
 
+### Depression
+````r
+ggplot(data=mentalhealth_music_survey,aes(x= Depression)) + geom_bar(fill='black')+ 
+  scale_x_continuous(breaks = seq(0,10, 2))+
+  labs(y='participant count',title = 'Participant Depression Scores')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224395170-1975cc80-b48f-45d0-b5a3-1d0af63a443a.png)
+````r
+arrange(count(mentalhealth_music_survey,Depression),desc(n))
+  ````
+|Depression | n   |
+| --------- | --- |
+| 7         | 96  |
+| 2         | 93  |
+| 6         | 88  |
+| 0         | 84  |
+| 8         | 77  |
+| 3         | 59  |
+| 4         | 58  |
+| 5         | 56  |
+| 10        | 45  |
+| 1         | 40  |
+| 9         | 38  |
+| 3.5       | 2   |
+#### There is a spread of survey respondents across the Depression scores.
+
+### Insomnia
+````r
+ggplot(data=mentalhealth_music_survey,aes(x= Insomnia)) + geom_bar(fill='black')+ 
+   scale_x_continuous(breaks = seq(0,10, 2))+ 
+  labs(y='participant count', title = 'Insomnia Scores')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224398491-e1aa3ada-c0bd-46ab-b9f3-ced7e84a05a8.png)
+
+````r
+arrange(count(mentalhealth_music_survey,Insomnia),desc(n))
+  ````
+|Insomnia   | n   |
+| --------- | --- |
+| 0         | 149 |
+| 2         | 88  |
+| 1         | 82  |
+| 3         | 68  |
+| 6         | 62  |
+| 4         | 59  |
+| 7         | 59  |
+| 5         | 58  |
+| 8         | 49  |
+| 10        | 34  |
+| 9         | 27  |
+| 3.5       | 1   |
+#### Majority of the survey respondents have low Insomnia levels, i.e. an Insomnia score less than 5.
+
+### OCD
+````r
+ggplot(data=mentalhealth_music_survey,aes(x= OCD)) + geom_bar(fill='black')+ 
+scale_x_continuous(breaks = seq(0,10, 2))+
+  labs(y='participant count', title = 'OCD Scores')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224402513-c27a97a0-99b6-4ec1-a7ec-0e789c6c219e.png)
+
+````r
+arrange(count(mentalhealth_music_survey,OCD),desc(n))
+  ````
+|OCD        | n   |
+| --------- | --- |
+| 0         | 249 |
+| 2         | 96  |
+| 1         | 95  |
+| 3         | 64  |
+| 5         | 54  |
+| 4         | 48  |
+| 7         | 34  |
+| 6         | 33  |
+| 8         | 28  |
+| 10        | 20  |
+| 9         | 14  |
+| 5.5       | 1   |
+| 8.5       | 1   |
+#### Similar with Insomnia levels, majority of survey respondents registered low OCD levels.
+#### In summary, majority of the participants have low insomnia and OCD scores while a considerable amount of participants indicated that they have high anxiety and depression scores.
 
 ## Survey Respondent Mental Health Based on Their Musical Background- Extended Analysis
 ### Anxiety
@@ -327,3 +409,60 @@ ggplot(data = count(Non_Composer,OCD), mapping = aes(x = OCD,y= n))+
 #### As is with the instrumentalists, majority composers and non-composers show extremely low levels of OCD.
 
 #### In summary, survey respondents who are instrumentalists and composers experienced high levels of anxiety. In addition, composers also experienced high levels of depression. It is possible that those composers who suffer depression also suffer from insomnia though the number isn't high.
+
+## Extremely High Mental Health (i.e scores greater 8) versus Average Music Listening Times
+### Creation of new datasets for extremely high mental health and the averages
+  ````r
+E_Anxiety <- mentalhealth_music_survey %>% select(`Hours per day`,Anxiety) %>%
+  filter(Anxiety > 8) 
+E_Depression <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,Depression) %>%  filter(Depression >8)
+E_Insomnia <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,Insomnia) %>%  filter(Insomnia > 8)
+E_OCD <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,OCD) %>%  filter(OCD > 8)
+EMH_avgMusicTime <- data.frame( 
+  Mental_Health = c('Anxiety','Depression','Insomnia','OCD'), 
+  Avg_Music_Time = c((round(mean(E_Anxiety$`Hours per day`),2)),
+                     (round(mean(E_Depression$`Hours per day`),2)),
+                     (round(mean(E_Insomnia$`Hours per day`),2)),
+                     (round(mean(E_OCD$`Hours per day`),2))),
+  stringsAsFactors = FALSE)
+  ````
+  ### Extremely High Mental Health versus Average Listening Time Analysis
+   ````r
+   ggplot(data = EMH_avgMusicTime, aes(x=Avg_Music_Time,y=Mental_Health, fill=Mental_Health))+ 
+  geom_bar(stat = 'identity') +  
+  labs(x='Average Time Listened to Music',y= 'Mental Health',
+       title = 'Average Time Listened to Music of Participants with Extremely High Mental Health Issues')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224410899-f3005b7e-7251-4f06-a12c-a2415de4952e.png)
+#### Survey respondents with extreme insomnia spend a lot more time listening to music , over 5 hours daily, than respondents with other extreme mental health issues. Possibly this replaces sleep.
+
+##  Extremely Low Mental Health (i.e. scores less than 3) vs Average Time Listened to Music
+### Creation of new datasets for extremely low mental health and the averages
+  ````r
+EL_Anxiety <- mentalhealth_music_survey %>% select(`Hours per day`,Anxiety) %>%
+  filter(Anxiety < 3) 
+EL_Depression <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,Depression) %>%  filter(Depression <3)
+EL_Insomnia <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,Insomnia) %>%  filter(Insomnia <3)
+EL_OCD <- mentalhealth_music_survey %>% 
+  select(`Hours per day`,OCD) %>%  filter(OCD <3)
+ELMH_avgMusicTime <- data.frame( 
+  Mental_Health = c('Anxiety','Depression','Insomnia','OCD'), 
+  Avg_Music_Time = c((round(mean(EL_Anxiety$`Hours per day`),2)),
+                     (round(mean(EL_Depression$`Hours per day`),2)),
+                     (round(mean(EL_Insomnia$`Hours per day`),2)),
+                     (round(mean(EL_OCD$`Hours per day`),2))),
+  stringsAsFactors = FALSE)
+  ````
+### Extremely Low Mental Health versus Average Listening Time Analysis
+   ````r
+ ggplot(data = ELMH_avgMusicTime, aes(x=Avg_Music_Time,y=Mental_Health, fill=Mental_Health))+ 
+  geom_bar(stat = 'identity') +  
+  labs(x='Average Time Listened to Music',y= 'Mental Health',
+       title = 'Average Time Listened to Music of Participants with Extremely Low Mental Health Issues')
+  ````
+  ![image](https://user-images.githubusercontent.com/88348888/224412983-ea1b010d-5d33-48fa-bacc-90837172ca08.png)
