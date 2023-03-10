@@ -168,6 +168,38 @@ corrplot(MHM_corr_table2,method = "circle",type = "upper",order="hclust", tl.col
 ##### There is a slight correlation between mental health and musical background of respondents. In particular, between composers and their depression and insomnia levels; and between instrumentalists and their anxiety and depression levels. These need to be investigated further.
 ##### The correlation between the mental health parameters are stronger with Anxiety and Depression having the strongest correlation followed by Depression and Insomnia then Anxiety and OCD. This implies that respondents with anxiety are likely to have depression. This goes for depression and imsonia, and anxiety and OCD.
 
+## Survey Respondents General Mental Health
+### Anxiety
+````r
+ggplot(data=mentalhealth_music_survey,aes(x= Anxiety)) + geom_bar(fill='black')+ 
+  scale_x_continuous(breaks = seq(0,10, 2)) + 
+  labs(y='participant count', title = 'Participant Anxiety Scores')
+  ````
+![image](https://user-images.githubusercontent.com/88348888/224380283-5b953a83-eb8a-4ec6-a867-34a366a3ac44.png)
+
+````r
+round(mean(mentalhealth_music_survey$Anxiety),2)
+  ````
+'5.82'
+````r
+arrange(count(mentalhealth_music_survey, Anxiety),desc(n))
+  ````
+|Anxiety | n   |
+| ------ | --- |
+| 7      | 122 |
+| 8      | 115 |
+| 6      | 83  |
+| 3      | 69  |
+| 10     | 67  |
+| 5      | 59  |
+| 4      | 56  |
+| 9      | 56  |
+| 2      | 44  |
+| 0      | 35  |
+| 1      | 29  |
+| 7.5    | 1   |
+
+
 ## Survey Respondent Mental Health Based on Their Musical Background- Extended Analysis
 ### Anxiety
 ### Anxiety levels of instrumentalists and non-instrumentalists
