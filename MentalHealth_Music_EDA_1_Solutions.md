@@ -190,7 +190,7 @@ arrange(count(mentalhealth_music_survey, Anxiety),desc(n))
 | 8      | 115 |
 | 6      | 83  |
 | 3      | 69  |
-| 10     | 67  |
+| 10      67  |
 | 5      | 59  |
 | 4      | 56  |
 | 9      | 56  |
