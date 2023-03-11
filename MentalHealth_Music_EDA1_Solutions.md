@@ -466,3 +466,5 @@ ELMH_avgMusicTime <- data.frame(
        title = 'Average Time Listened to Music of Participants with Extremely Low Mental Health Issues')
   ````
   ![image](https://user-images.githubusercontent.com/88348888/224412983-ea1b010d-5d33-48fa-bacc-90837172ca08.png)
+ #### Those with low Insomnia values spend the lest time listening to music in comparison with their counterparts. This makes sense as they spend more time sleeping. 
+
